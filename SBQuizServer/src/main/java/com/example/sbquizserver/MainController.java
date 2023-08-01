@@ -10,18 +10,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
-@Controller
+@RestController
 public class MainController {
 
+
+    private final QuizRepository quizRepository;
+
+    private final QuestionRepository questionRepository;
+
+    private final AnswerRepository answerRepository;
+
     @Autowired
-    private QuizRepository quizRepository;
-    @Autowired
-    private QuestionRepository questionRepository;
-    @Autowired
-    private AnswerRepository answerRepository;
+    public MainController(QuizRepository quizRepository, QuestionRepository questionRepository, AnswerRepository answerRepository){
+        this.quizRepository = quizRepository;
+        this.questionRepository = questionRepository;
+        this.answerRepository = answerRepository;
+    }
 
     @GetMapping("/quiz/all")
     public @ResponseBody Iterable<Quiz> getAllUsers(){return quizRepository.findAll();}
