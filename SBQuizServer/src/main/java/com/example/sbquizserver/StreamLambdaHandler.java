@@ -1,5 +1,8 @@
 package com.example.sbquizserver;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.amazonaws.serverless.exceptions.ContainerInitializationException;
 import com.amazonaws.serverless.proxy.model.AwsProxyRequest;
 import com.amazonaws.serverless.proxy.model.AwsProxyResponse;
@@ -15,6 +18,7 @@ import java.io.OutputStream;
 
 public class StreamLambdaHandler implements RequestStreamHandler{
     private static SpringBootLambdaContainerHandler<AwsProxyRequest, AwsProxyResponse> handler;
+    private static final Logger logger = LoggerFactory.getLogger(StreamLambdaHandler.class);
 
     public StreamLambdaHandler() throws ContainerInitializationException {
         handler = new SpringBootProxyHandlerBuilder<AwsProxyRequest>()
